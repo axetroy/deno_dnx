@@ -7,7 +7,7 @@ A cli tool is used to run the deno command to delete the generated files when th
 ### Install
 
 ```shell
-deno install cross-env https://raw.githubusercontent.com/axetroy/deno_dnx/master/mod.ts --allow-run --allow-env
+deno install dnx https://raw.githubusercontent.com/axetroy/deno_dnx/master/mod.ts --allow-run --allow-env
 ```
 
 ### Usage
