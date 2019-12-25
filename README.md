@@ -1,0 +1,21 @@
+[![Build Status](https://github.com/axetroy/deno_dnx/workflows/test/badge.svg)](https://github.com/axetroy/deno_dnx/actions)
+
+### setting environment variable
+
+A cli tool is used to run the deno command to delete the generated files when the process exits
+
+### Install
+
+```shell
+deno install cross-env https://raw.githubusercontent.com/axetroy/deno_dnx/master/mod.ts --allow-run --allow-env
+```
+
+### Usage
+
+```shell
+dnx run --allow-read https://deno.land/std/examples/cat.ts README.md
+```
+
+## License
+
+The [MIT License](LICENSE)
