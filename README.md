@@ -1,6 +1,6 @@
 [![Build Status](https://github.com/axetroy/deno_dnx/workflows/test/badge.svg)](https://github.com/axetroy/deno_dnx/actions)
 
-### setting environment variable
+### dnx
 
 A cli tool is used to run the deno command to delete the generated files when the process exits
 
