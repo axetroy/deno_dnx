@@ -1,8 +1,7 @@
-import { runIfMain, test } from "https://deno.land/std@v0.27.0/testing/mod.ts";
-const { run, execPath } = Deno;
+const { test, run, execPath } = Deno;
 
 test(async function testGetProcess() {
-  const ps = await run({
+  const ps = run({
     stdout: "piped",
     args: [
       execPath(),
@@ -20,5 +19,3 @@ test(async function testGetProcess() {
 
   console.log(output);
 });
-
-runIfMain(import.meta);

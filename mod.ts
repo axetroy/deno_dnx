@@ -1,11 +1,12 @@
 /**
  * Usage:
- *   deno install dnx https://deno.land/std/examples/dnx.ts --allow-env --allow-read --allow-write --allow-run
+ *   deno install --allow-env --allow-read --allow-write --allow-run -f dnx https://deno.land/x/deno_dnx/dnx.ts
  *   dnx run --allow-read https://deno.land/std/examples/cat.ts README.md
  */
 
-import { join } from "https://deno.land/std@v0.27.0/path/mod.ts";
-import { ensureDir } from "https://deno.land/std@v0.27.0/fs/ensure_dir.ts";
+import { join } from "https://deno.land/std@v0.35.0/path/mod.ts";
+import { ensureDir } from "https://deno.land/std@v0.35.0/fs/ensure_dir.ts";
+import { signal } from "https://deno.land/std@v0.35.0/signal/mod.ts";
 const {
   run,
   execPath,
@@ -18,9 +19,7 @@ const {
   dir
 } = Deno;
 
-// TODO: handle signal
-
-const dnxCacheDir = join(dir("cache"), "dnx");
+const dnxCacheDir = join(dir("cache") as string, "dnx");
 
 await ensureDir(dnxCacheDir);
 
@@ -30,7 +29,7 @@ const tempDir = makeTempDirSync({
 
 const ps = run({
   cwd: cwd(),
-  args: [execPath()].concat(args.slice(1)),
+  args: [execPath()].concat(args),
   env: {
     ...env(),
     DENO_DIR: tempDir
@@ -40,8 +39,24 @@ const ps = run({
   stderr: "inherit"
 });
 
+const disposable = signal(
+  Deno.Signal.SIGUSR1,
+  Deno.Signal.SIGUSR2,
+  Deno.Signal.SIGINT
+);
+
+(async () => {
+  for await (const _ of disposable) {
+    removeSync(tempDir, { recursive: true });
+    ps.kill(1);
+    exit(1);
+  }
+});
+
 const status = await ps.status();
 
 removeSync(tempDir, { recursive: true });
+
+disposable.dispose();
 
 exit(status.code);
