@@ -3,7 +3,7 @@ const { test, run, execPath } = Deno;
 test(async function testGetProcess() {
   const ps = run({
     stdout: "piped",
-    args: [
+    cmd: [
       execPath(),
       "run",
       "--allow-env",
