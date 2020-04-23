@@ -16,7 +16,7 @@ const {
   exit,
   makeTempDirSync,
   removeSync,
-  dir
+  dir,
 } = Deno;
 
 const dnxCacheDir = join(dir("cache") as string, "dnx");
@@ -24,7 +24,7 @@ const dnxCacheDir = join(dir("cache") as string, "dnx");
 await ensureDir(dnxCacheDir);
 
 const tempDir = makeTempDirSync({
-  dir: dnxCacheDir
+  dir: dnxCacheDir,
 });
 
 const ps = run({
@@ -32,17 +32,17 @@ const ps = run({
   cmd: [execPath(), "run"].concat(args),
   env: {
     ...env(),
-    DENO_DIR: tempDir
+    DENO_DIR: tempDir,
   },
   stdin: "inherit",
   stdout: "inherit",
-  stderr: "inherit"
+  stderr: "inherit",
 });
 
 const disposable = signal(
   Deno.Signal.SIGUSR1,
   Deno.Signal.SIGUSR2,
-  Deno.Signal.SIGINT
+  Deno.Signal.SIGINT,
 );
 
 (async () => {

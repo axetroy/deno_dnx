@@ -11,8 +11,8 @@ test(async function testGetProcess() {
       "--allow-write",
       "--allow-run",
       "./mod.ts",
-      "--version"
-    ]
+      "--version",
+    ],
   });
 
   const output = new TextDecoder().decode(await ps.output());
