@@ -1,6 +1,6 @@
 /**
  * Usage:
- *   deno install --allow-env --allow-read --allow-write --allow-run -f dnx https://deno.land/x/deno_dnx/dnx.ts
+ *   deno install -f --allow-run --allow-env --allow-read --allow-write dnx https://raw.githubusercontent.com/axetroy/deno_dnx/master/mod.ts
  *   dnx run --allow-read https://deno.land/std/examples/cat.ts README.md
  */
 
@@ -29,7 +29,7 @@ const tempDir = makeTempDirSync({
 
 const ps = run({
   cwd: cwd(),
-  cmd: [execPath()].concat(args),
+  cmd: [execPath(), "run"].concat(args),
   env: {
     ...env(),
     DENO_DIR: tempDir
