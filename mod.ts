@@ -4,9 +4,9 @@
  *   dnx run --allow-read https://deno.land/std/examples/cat.ts README.md
  */
 
-import { join } from "https://deno.land/std@v0.40.0/path/mod.ts";
-import { ensureDir } from "https://deno.land/std@v0.40.0/fs/ensure_dir.ts";
-import { signal } from "https://deno.land/std@v0.40.0/signal/mod.ts";
+import { join } from "https://deno.land/std@v0.41.0/path/mod.ts";
+import { ensureDir } from "https://deno.land/std@v0.41.0/fs/ensure_dir.ts";
+import { signal } from "https://deno.land/std@v0.41.0/signal/mod.ts";
 const {
   run,
   execPath,

@@ -4,6 +4,8 @@
 
 A cli tool is used to run the deno command to delete the generated files when the process exits
 
+require: Deno v0.41.0
+
 ### Install
 
 ```shell
