@@ -29,7 +29,7 @@ const tempDir = makeTempDirSync({
 
 const ps = run({
   cwd: cwd(),
-  cmd: [execPath(), "run"].concat(args),
+  cmd: [execPath()].concat(args),
   env: {
     ...env(),
     DENO_DIR: tempDir,

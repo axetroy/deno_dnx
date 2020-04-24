@@ -17,5 +17,7 @@ test(async function testGetProcess() {
 
   const output = new TextDecoder().decode(await ps.output());
 
-  console.log(output);
+  console.log(output)
+
+  ps.close()
 });
