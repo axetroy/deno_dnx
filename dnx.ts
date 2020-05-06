@@ -1,7 +1,10 @@
 /**
+ * Require:
+ *   Deno v1.0.0-rc1
+ * Install:
+ *   deno install -f --unstable --allow-run --allow-env --allow-read --allow-write https://raw.githubusercontent.com/axetroy/deno_dnx/master/dnx.ts
  * Usage:
- *   deno install -f --allow-run --allow-env --allow-read --allow-write dnx https://raw.githubusercontent.com/axetroy/deno_dnx/master/mod.ts
- *   dnx run --allow-read https://deno.land/std/examples/cat.ts README.md
+ *   dnx run --allow-net --allow-read https://deno.land/std@v1.0.0-rc1/http/file_server.ts
  */
 
 import { join } from "https://deno.land/std@v1.0.0-rc1/path/mod.ts";
