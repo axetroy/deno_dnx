@@ -9,13 +9,13 @@ require: Deno v1.0.0-rc1
 ### Install
 
 ```shell
-deno install -f --allow-run --allow-env --allow-read --allow-write dnx https://raw.githubusercontent.com/axetroy/deno_dnx/master/mod.ts
+deno install -f --unstable --allow-run --allow-env --allow-read --allow-write dnx https://raw.githubusercontent.com/axetroy/deno_dnx/master/mod.ts
 ```
 
 ### Usage
 
 ```shell
-dnx run --allow-read https://deno.land/std/examples/cat.ts README.md
+dnx run --allow-read https://deno.land/std@v1.0.0-rc1/examples/cat.ts README.md
 ```
 
 ## License
