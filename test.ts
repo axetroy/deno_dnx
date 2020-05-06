@@ -1,23 +1,33 @@
-const { test, run, execPath } = Deno;
+import {
+  assert,
+} from "https://deno.land/std@v1.0.0-rc1/testing/asserts.ts";
 
-test(async function testGetProcess() {
-  const ps = run({
-    stdout: "piped",
-    cmd: [
-      execPath(),
-      "run",
-      "--allow-env",
-      "--allow-read",
-      "--allow-write",
-      "--allow-run",
-      "./mod.ts",
-      "--version",
-    ],
-  });
+const { test, run, execPath, readAll } = Deno;
 
-  const output = new TextDecoder().decode(await ps.output());
+test({
+  name: "run mod.ts",
+  fn: async () => {
+    const ps = run({
+      stdout: "piped",
+      cmd: [
+        execPath(),
+        "run",
+        "--unstable",
+        "--allow-env",
+        "--allow-read",
+        "--allow-write",
+        "--allow-run",
+        "./mod.ts",
+        "--version",
+      ],
+    });
 
-  console.log(output);
+    const output = new TextDecoder().decode(await readAll(ps.stdout!));
 
-  ps.close();
+    assert(output.length > 0);
+
+    ps.stdout?.close();
+
+    ps.close();
+  },
 });

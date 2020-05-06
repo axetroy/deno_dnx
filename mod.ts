@@ -4,9 +4,12 @@
  *   dnx run --allow-read https://deno.land/std/examples/cat.ts README.md
  */
 
-import { join } from "https://deno.land/std@v0.41.0/path/mod.ts";
-import { ensureDir } from "https://deno.land/std@v0.41.0/fs/ensure_dir.ts";
-import { signal } from "https://deno.land/std@v0.41.0/signal/mod.ts";
+import { join } from "https://deno.land/std@v1.0.0-rc1/path/mod.ts";
+import { ensureDir } from "https://deno.land/std@v1.0.0-rc1/fs/ensure_dir.ts";
+import {
+  signal,
+  Disposable,
+} from "https://deno.land/std@v1.0.0-rc1/signal/mod.ts";
 const {
   run,
   execPath,
@@ -31,7 +34,7 @@ const ps = run({
   cwd: cwd(),
   cmd: [execPath()].concat(args),
   env: {
-    ...env(),
+    ...env.toObject(),
     DENO_DIR: tempDir,
   },
   stdin: "inherit",
@@ -39,14 +42,26 @@ const ps = run({
   stderr: "inherit",
 });
 
-const disposable = signal(
+const signalListener = signal(
   Deno.Signal.SIGUSR1,
   Deno.Signal.SIGUSR2,
   Deno.Signal.SIGINT,
 );
 
+const disposables: Disposable[] = [
+  signalListener,
+  {
+    dispose: () => {
+      ps.stdin?.close();
+      ps.stdout?.close();
+      ps.stderr?.close();
+      ps.close();
+    },
+  },
+];
+
 (async () => {
-  for await (const _ of disposable) {
+  for await (const _ of signalListener) {
     removeSync(tempDir, { recursive: true });
     ps.kill(1);
     exit(1);
@@ -55,8 +70,10 @@ const disposable = signal(
 
 const status = await ps.status();
 
-removeSync(tempDir, { recursive: true });
+for (const entry of disposables) {
+  entry.dispose();
+}
 
-disposable.dispose();
+removeSync(tempDir, { recursive: true });
 
 exit(status.code);
