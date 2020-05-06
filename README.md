@@ -2,7 +2,7 @@
 
 ### dnx
 
-A command line tool similar to [npx]()
+A command line tool similar to [npx](https://github.com/npm/npx)
 
 It is exactly the same as Deno, the only difference is that dnx is `"clean"`
 
