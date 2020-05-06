@@ -25,4 +25,4 @@ jobs:
         env:
           RUST_BACKTRACE: 1
         run: |
-          deno test -A
+          deno test --unstable -A
