@@ -17,7 +17,7 @@ test({
         "--allow-read",
         "--allow-write",
         "--allow-run",
-        "./mod.ts",
+        "./dnx.ts",
         "--version",
       ],
     });
