@@ -9,7 +9,7 @@ require: Deno v1.0.0-rc1
 ### Install
 
 ```shell
-deno install -f --unstable --allow-run --allow-env --allow-read --allow-write https://raw.githubusercontent.com/axetroy/deno_dnx/master/mod.ts
+deno install -f --unstable --allow-run --allow-env --allow-read --allow-write https://raw.githubusercontent.com/axetroy/deno_dnx/master/dnx.ts
 ```
 
 ### Usage
